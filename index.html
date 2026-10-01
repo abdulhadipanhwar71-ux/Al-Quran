@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الکریم - Quran Explorer</title>
+    <!-- Google Fonts for authentic Arabic and Urdu calligraphy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cinzel:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section with Islamic Theme -->
+    <header class="app-header">
+        <div class="header-overlay"></div>
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-symbol">﷽</div>
+                <div class="logo-titles">
+                    <h1>القرآن الکریم</h1>
+                    <p class="subtitle">Quran Explorer & Study Portal</p>
+                </div>
+            </div>
+
+            <!-- Empty Search Bar as strictly requested -->
+            <div class="search-section">
+                <form id="search-form" onsubmit="handleSearch(event)">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="search-input" autocomplete="off">
+                        <button type="submit" id="search-btn" title="Search">
+                            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation & Controls Bar -->
+    <section class="controls-bar">
+        <div class="controls-container">
+            <!-- Surah Dropdown Selector -->
+            <div class="surah-selector-group">
+                <label for="surah-select">سورۃ منتخب کریں:</label>
+                <select id="surah-select" onchange="onSurahChange(this.value)">
+                    <option value="">منتخب کریں...</option>
+                </select>
+            </div>
+
+            <!-- Next and Previous Buttons -->
+            <div class="nav-buttons-group">
+                <button id="prev-btn" onclick="goToSurah(currentSurahNumber - 1)">
+                    <span class="arrow">&#8594;</span> پچھلی سورۃ
+                </button>
+                <button id="next-btn" onclick="goToSurah(currentSurahNumber + 1)">
+                    اگلی سورۃ <span class="arrow">&#8592;</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <!-- Surah Info Banner -->
+        <div id="surah-card" class="surah-banner-card">
+            <div class="banner-pattern"></div>
+            <div class="surah-meta">
+                <div class="surah-arabic-title" id="surah-title-arabic">سُورَةُ ٱلْفَاتِحَةِ</div>
+                <div class="surah-english-title" id="surah-title-english">Al-Faatiha • The Opening</div>
+                <div class="surah-badges">
+                    <span class="badge" id="surah-type-badge">مکی</span>
+                    <span class="badge" id="surah-ayahs-badge">7 آیات</span>
+                    <span class="badge" id="surah-number-badge">نمبر: 1</span>
+                </div>
+            </div>
+            <div class="bismillah-calligraphy" id="bismillah-box">
+                بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+            </div>
+        </div>
+
+        <!-- Search Status / Message Box -->
+        <div id="search-alert" class="search-status-bar" style="display: none;">
+            <span id="search-msg"></span>
+            <button onclick="clearSearch()" class="clear-btn">واپس سورۃ پر جائیں</button>
+        </div>
+
+        <!-- Ayahs Container List -->
+        <div id="ayahs-list" class="ayahs-container">
+            <!-- Dynamic Ayah Cards will be rendered here by JavaScript -->
+            <div class="loading-spinner">قرآن پاک کا ڈیٹا لوڈ ہو رہا ہے...</div>
+        </div>
+    </main>
+
+    <!-- Global Audio Player Floating Bar -->
+    <div id="global-player-bar" class="audio-player-bar" style="display: none;">
+        <div class="player-content">
+            <div class="player-info">
+                <span class="playing-icon">🔊</span>
+                <span id="player-title">تلاوت: الشیخ مشاری راشد العفاسی</span>
+                <span id="player-ayah-tag" class="ayah-tag">آیت 1</span>
+            </div>
+            <audio id="audio-element" controls preload="none"></audio>
+            <button class="close-player-btn" onclick="closeAudioPlayer()">✕</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>القرآن الکریم - Fast, Beautiful & Responsive Quran Application</p>
+            <p class="copyright">FastAPI • MySQL • Pandas • Step-by-Step Architecture</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
